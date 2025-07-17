@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 type Nganya = {
@@ -13,9 +13,17 @@ type Nganya = {
 
 const Screen = () => {
   const { id } = useParams();
+  const router = useRouter();
   const [nganya, setNganya] = useState<Nganya | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const access = sessionStorage.getItem('access_granted');
+    if (!access) {
+      router.push('/');
+      return;
+    }
+
     const data = localStorage.getItem('nganyas');
     if (data) {
       try {
@@ -26,9 +34,10 @@ const Screen = () => {
         console.error('Error parsing localStorage:', error);
       }
     }
-  }, [id]);
+    setLoading(false);
+  }, [id, router]);
 
-  if (!nganya) {
+  if (loading || !nganya) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-black text-white">
         Loading...
