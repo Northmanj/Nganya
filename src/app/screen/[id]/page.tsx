@@ -81,6 +81,7 @@ const Screen = () => {
 
       {slide === 2 && (
   <>
+    <h1 className="text-5xl md:text-6xl font-bold mb-6 text-center">{nganya.name}</h1>
     <p className="text-3xl md:text-4xl font-semibold text-green-400 mb-4 text-center">
       PAY VIA MPESA: {nganya.phoneNumber}
     </p>
