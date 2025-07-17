@@ -9,6 +9,7 @@ const UploadNganya = () => {
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [fare, setFare] = useState<number | ''>('');
   const [imageData, setImageData] = useState<string | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +27,12 @@ const UploadNganya = () => {
     if (!id || !name || !phoneNumber || !imageData) return;
 
     const existing = JSON.parse(localStorage.getItem('nganyas') || '[]');
-    const updated = [...existing, { id, name, phoneNumber, image: imageData }];
+    const updated = [
+      ...existing,
+      { id, name, phoneNumber, image: imageData, fare: fare === '' ? undefined : Number(fare) },
+    ];
     localStorage.setItem('nganyas', JSON.stringify(updated));
+    sessionStorage.setItem('access_granted', 'true');
     router.push(`/screen/${id}`);
   };
 
@@ -58,6 +63,14 @@ const UploadNganya = () => {
           className="w-full p-3 rounded bg-gray-800 border border-gray-700"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Fare (Optional)"
+          className="w-full p-3 rounded bg-gray-800 border border-gray-700"
+          value={fare}
+          onChange={(e) => setFare(e.target.value === '' ? '' : Number(e.target.value))}
         />
 
         <input
