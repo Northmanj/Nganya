@@ -20,7 +20,7 @@ export default function Dashboard() {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const displayId = nganyaName.replace(/\s+/g, '-').toLowerCase();
 
@@ -32,8 +32,8 @@ export default function Dashboard() {
     };
 
     const existing = localStorage.getItem('nganyas');
-    const parsed = existing ? JSON.parse(existing) : [];
-    const updated = [...parsed.filter((n: any) => n.id !== displayId), newNganya];
+    const parsed: typeof newNganya[] = existing ? JSON.parse(existing) : [];
+    const updated = [...parsed.filter((n) => n.id !== displayId), newNganya];
     localStorage.setItem('nganyas', JSON.stringify(updated));
 
     router.push(`/screen/${displayId}`);
@@ -41,7 +41,10 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <form onSubmit={handleSubmit} className="bg-gray-800 shadow-xl p-8 rounded-xl w-full max-w-md space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-800 shadow-xl p-8 rounded-xl w-full max-w-md space-y-5"
+      >
         <h1 className="text-3xl font-bold text-center">Nganya Dashboard</h1>
         <input
           type="text"
