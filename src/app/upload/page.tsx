@@ -32,35 +32,38 @@ const UploadNganya = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-4">Upload Nganya Info</h1>
+    <div className="min-h-screen bg-black text-white p-6 flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold mb-6 text-center">Upload Nganya Info</h1>
 
-      <div className="w-full max-w-md space-y-4">
+      <div className="w-full max-w-md space-y-5">
         <input
           type="text"
           placeholder="Nganya ID (e.g. baba-yaga)"
-          className="w-full p-2 rounded bg-gray-800 border border-gray-600"
+          className="w-full p-3 rounded bg-gray-800 border border-gray-700"
           value={id}
           onChange={(e) => setId(e.target.value)}
         />
+
         <input
           type="text"
           placeholder="Nganya Name"
-          className="w-full p-2 rounded bg-gray-800 border border-gray-600"
+          className="w-full p-3 rounded bg-gray-800 border border-gray-700"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+
         <input
           type="text"
-          placeholder="Conductor Phone Number"
-          className="w-full p-2 rounded bg-gray-800 border border-gray-600"
+          placeholder="MPESA Phone Number"
+          className="w-full p-3 rounded bg-gray-800 border border-gray-700"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
+
         <input
           type="file"
           accept="image/*"
-          className="w-full p-2 rounded bg-gray-800 border border-gray-600"
+          className="w-full p-3 rounded bg-gray-800 border border-gray-700"
           onChange={handleImageUpload}
         />
 
@@ -76,7 +79,7 @@ const UploadNganya = () => {
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded"
+          className="w-full bg-green-600 hover:bg-green-700 text-white p-3 rounded text-lg font-semibold"
         >
           Save & View
         </button>
